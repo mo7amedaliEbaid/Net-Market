@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/theme/theme_data.dart';
-
+import 'package:net_market/screens/search_screen/search_screen.dart';
 import '../const/global_constants.dart';
-import '../services/localization.dart';
 PreferredSizeWidget MyAppBar(BuildContext context,String title){
   Size size = MediaQuery.of(context).size;
   return AppBar(
@@ -23,7 +21,11 @@ PreferredSizeWidget MyAppBar(BuildContext context,String title){
             SizedBox(
               width: 12,
             ),
-            Icon(Icons.search),
+            InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchScreen()));
+              },
+                child: Icon(Icons.search)),
           ],
         ),
         Text(title),

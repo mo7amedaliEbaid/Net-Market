@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:net_market/providers/darkTheme_provider.dart';
 import 'package:net_market/providers/locale_provider.dart';
 import 'package:net_market/providers/categories_provider.dart';
+import 'package:net_market/providers/search_provider.dart';
 import 'package:net_market/screens/splash/splash_screen.dart';
 import 'package:net_market/services/localization.dart';
 import 'package:net_market/theme/theme_data.dart';
@@ -15,6 +16,7 @@ main()=>runApp(
       ChangeNotifierProvider(create: (_) => LocaleCont()),
       ChangeNotifierProvider(create: (_) => CategoriesProvider()),
       ChangeNotifierProvider(create: (_) => StoreProvider()),
+      ChangeNotifierProvider(create: (_) => SearchProvider()),
     ], child:  MyApp()));
 
 class MyApp extends StatefulWidget {

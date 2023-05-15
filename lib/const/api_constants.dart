@@ -6,6 +6,7 @@ class ApiConstants{
   static final IMAGE="https://www.mataajer.me";
   static final GETCATEGORY="GetCategoriesByStoreId/";
   static final GETCATEGORYLIST="GetProductListByCategoryId";
+  static final GETSEARCHRESULTS= "GetProductsSearchBy";
 
 }
 

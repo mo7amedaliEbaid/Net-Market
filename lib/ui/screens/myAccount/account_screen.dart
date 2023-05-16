@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/theme/theme_data.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/global_constants.dart';
@@ -9,6 +8,7 @@ import '../../../providers/darkTheme_provider.dart';
 import '../../custom_widgets/bottom_sheets/country.dart';
 import '../../custom_widgets/bottom_sheets/language.dart';
 import '../../custom_widgets/bottom_sheets/login.dart';
+import '../../theme/theme_data.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);

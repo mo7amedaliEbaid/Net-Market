@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '../const/global_constants.dart';
+import '../../const/global_constants.dart';
 
 class Styles {
 

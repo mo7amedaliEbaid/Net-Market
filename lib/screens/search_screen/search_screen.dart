@@ -91,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           // borderRadius: BorderRadius.circular(10),
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                                  "${ApiConstants.IMAGE}${data.productListBySearch[index].productPictures.first.pictureUrl}"),
+                                                  "${ApiConstants.IMAGE}${data.productListBySearch[index].productPictures![index].pictureUrl}"),
                                               fit: BoxFit.fill)),
                                     ),
                                     Container(

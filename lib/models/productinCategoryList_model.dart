@@ -1,28 +1,43 @@
 class ProductbyCategory {
- String id;
-  String name;
-  /*dynamic shortDescription;
-  dynamic fullDescription;*/
-  double price;
-  double oldPrice;
-  List<ProductPicture> productPictures;
+ String? id;
+  String? name;
+  String? shortDescription;
+ int quantity;
+  //dynamic fullDescription;
+  double? price;
+  double? oldPrice;
+  List<ProductPicture>? productPictures;
  // List<ProductAttribute> productAttribute;
 
   ProductbyCategory({
-    required this.id,
-    required this.name,
-   // this.shortDescription,
+     this.id,
+     this.name,
+   this.shortDescription,
+    this.quantity = 0,
+
   //  this.fullDescription,
-    required this.price,
-    required this.oldPrice,
-    required this.productPictures,
+     this.price,
+     this.oldPrice,
+     this.productPictures,
     //required this.productAttribute,
   });
+ factory ProductbyCategory.fromItem(ProductbyCategory item, int quantity) {
+   return ProductbyCategory(
+     id: item.id,
+     name: item.name,
+     shortDescription: item.shortDescription,
+     quantity: quantity,
+     price: item.price,
+     oldPrice: item.oldPrice,
+     productPictures: item.productPictures,
+
+   );
+ }
 
   factory ProductbyCategory.fromJson(Map<String, dynamic> json) => ProductbyCategory(
    id: json["Id"],
     name: json["Name"],
-  // shortDescription: json["ShortDescription"],
+   shortDescription: json["ShortDescription"]??null,
    // fullDescription: json["FullDescription"],
    price: json["Price"],
    oldPrice: json["OldPrice"],

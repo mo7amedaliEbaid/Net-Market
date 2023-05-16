@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
 import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/providers/categories_provider.dart';
+import 'package:net_market/screens/product_screen/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class SingleCategory extends StatefulWidget {
@@ -53,16 +54,21 @@ class _SingleCategoryState extends State<SingleCategory> {
                       ),
                       child: Column(
                         children: [
-                          Container(
-                            height: size.height * .25,
-                            width: size.width * .44,
-                            decoration: BoxDecoration(
-                                // border:Border.all(color: Colors.amber,width: 1),
-                                // borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "${ApiConstants.IMAGE}${data.productListByCategory[index].productPictures.first.pictureUrl}"),
-                                    fit: BoxFit.fill)),
+                          InkWell(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetailsScreen(chosenproduct: data.productListByCategory[index])));
+                            },
+                            child: Container(
+                              height: size.height * .25,
+                              width: size.width * .44,
+                              decoration: BoxDecoration(
+                                  // border:Border.all(color: Colors.amber,width: 1),
+                                  // borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          "${ApiConstants.IMAGE}${data.productListByCategory[index].productPictures!.first.pictureUrl}"),
+                                      fit: BoxFit.fill)),
+                            ),
                           ),
                           Container(
                             width: size.width * .44,

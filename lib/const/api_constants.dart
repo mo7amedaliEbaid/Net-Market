@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
 class ApiConstants{
-  static final BASEURL="https://finaltest.mataajer.co/odata/MobileAPI/";
-  static final STORE="GetCurrentStore";
-  static final STOREID="63ba62e8844348f6ae5b3ce5";
-  static final IMAGE="https://www.mataajer.me";
-  static final GETCATEGORY="GetCategoriesByStoreId/";
-  static final GETCATEGORYLIST="GetProductListByCategoryId";
-  static final GETSEARCHRESULTS= "GetProductsSearchBy";
+  static const BASEURL="https://finaltest.mataajer.co/odata/MobileAPI/";
+  static const STORE="GetCurrentStore";
+  static const STOREID="63ba62e8844348f6ae5b3ce5";
+  static const IMAGE="https://www.mataajer.me";
+  static const GETCATEGORY="GetCategoriesByStoreId/";
+  static const GETCATEGORYLIST="GetProductListByCategoryId";
+  static const GETSEARCHRESULTS= "GetProductsSearchBy";
 
 }
 

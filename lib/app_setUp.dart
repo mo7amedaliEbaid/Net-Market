@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/screens/categories_screen/categories_screen.dart';
-import 'package:net_market/screens/home_screen/home_screen.dart';
-import 'package:net_market/screens/myAccount/account_screen.dart';
+import 'package:net_market/ui/screens/cart_screen/cart_screen.dart';
+import 'package:net_market/ui/screens/categories_screen/categories_screen.dart';
+import 'package:net_market/ui/screens/home_screen/home_screen.dart';
+import 'package:net_market/ui/screens/myAccount/account_screen.dart';
 class AppSetUp extends StatefulWidget {
   const AppSetUp({Key? key}) : super(key: key);
 
@@ -11,11 +12,13 @@ class AppSetUp extends StatefulWidget {
 
 class _AppSetUpState extends State<AppSetUp> {
   int _selectedIndex = 0;
+
+
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     CategoriesScreen(),
-    Text('Profile Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    AccountScreen(),
+    CartScreen(),
+    CartScreen(),
     AccountScreen(),
   ];
   void _onItemTapped(int index) {

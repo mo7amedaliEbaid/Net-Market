@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
 import 'package:net_market/const/global_constants.dart';
-import 'package:net_market/customized/app_bar.dart';
-import 'package:net_market/models/productinCategoryList_model.dart';
+import 'package:net_market/models/product_model.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../../providers/cart_provider.dart';
+import '../../custom_widgets/app_bar.dart';
+import '../../../providers/cart_provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key, required this.chosenproduct})
       : super(key: key);
-  final ProductbyCategory chosenproduct;
+  final Product chosenproduct;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -19,12 +18,14 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   late CartProvider cartProvider;
-  int newquantity=0;
+  int newquantity = 0;
+
   @override
   void initState() {
-    cartProvider=Provider.of(context,listen: false);
+    cartProvider = Provider.of(context, listen: false);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -97,14 +98,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     onPressed: widget.chosenproduct.quantity == 0
                         ? null
                         : () {
-                      setState(() {
-                        newquantity--;
-                        newquantity = widget.chosenproduct.quantity - 1;
-                        cartProvider
-                            .updateQuantity(widget.chosenproduct, newquantity);
-                      });
-
-                    },
+                            setState(() {
+                              newquantity--;
+                              newquantity = widget.chosenproduct.quantity - 1;
+                              cartProvider.updateQuantity(
+                                  widget.chosenproduct, newquantity);
+                            });
+                          },
                   ),
                   Container(
                     color: Colors.white,
@@ -122,69 +122,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       setState(() {
                         newquantity = widget.chosenproduct.quantity + 1;
                         newquantity++;
-                        cartProvider
-                            .updateQuantity(widget.chosenproduct, newquantity);
+                        cartProvider.updateQuantity(
+                            widget.chosenproduct, newquantity);
                       });
-
                     },
                   ),
                 ],
               ),
             ),
+            ElevatedButton(onPressed:(){
+              setState(() {
+
+              });
+              cartProvider.add(widget.chosenproduct, 1);
+            }, child: Text("buy"))
           ],
         ),
       );
     });
   }
-}
-
-Widget getHeaderWithQuantity(BuildContext context) {
-  ProductbyCategory productbyCategory = ProductbyCategory();
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      Text(
-        "${productbyCategory.price??1 * productbyCategory.quantity}\$",
-        // "test",
-        style: Theme.of(context).textTheme.headline6,
-      ),
-      Container(
-        child: Row(
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.remove),
-              color: const Color.fromRGBO(132, 132, 132, 1),
-              splashColor: Theme.of(context).accentColor,
-              disabledColor: const Color.fromRGBO(150, 150, 150, 1),
-              onPressed: productbyCategory.quantity == 0
-                  ? null
-                  : () {
-                      int newQuantity = productbyCategory.quantity - 1;
-                      Provider.of<CartProvider>(context, listen: false)
-                          .updateQuantity(productbyCategory, newQuantity);
-                    },
-            ),
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                productbyCategory.quantity.toString(),
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.add),
-              color: const Color.fromRGBO(132, 132, 132, 1),
-              splashColor: Theme.of(context).accentColor,
-              onPressed: () {
-                int newQuantity = productbyCategory.quantity + 1;
-                Provider.of<CartProvider>(context, listen: false)
-                    .updateQuantity(productbyCategory, newQuantity);
-              },
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
 }

@@ -1,10 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:net_market/const/app_constants.dart';
-import 'package:net_market/const/api_constants.dart';
-import 'package:net_market/theme/theme_data.dart';
-import '../../const/global_constants.dart';
-import '../../services/localization.dart';
+import '../../../const/global_constants.dart';
+import '../../../services/localization.dart';
 
 Widget RegisterBottomSheet(BuildContext context) {
   Size size = MediaQuery.of(context).size;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/customized/bottom_sheets/country.dart';
 import 'package:net_market/theme/theme_data.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/global_constants.dart';
-import '../../customized/app_bar.dart';
-import '../../customized/bottom_sheets/language.dart';
-import '../../customized/bottom_sheets/login.dart';
-import '../../providers/darkTheme_provider.dart';
-import '../../services/localization.dart';
+import '../../../const/global_constants.dart';
+import '../../../services/localization.dart';
+import '../../custom_widgets/app_bar.dart';
+import '../../../providers/darkTheme_provider.dart';
+import '../../custom_widgets/bottom_sheets/country.dart';
+import '../../custom_widgets/bottom_sheets/language.dart';
+import '../../custom_widgets/bottom_sheets/login.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);

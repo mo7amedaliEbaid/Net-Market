@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
-import 'package:net_market/customized/app_bar.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/categories_provider.dart';
-import '../home_screen//singlecategory_widget.dart';
+import '../../custom_widgets/app_bar.dart';
+import '../../../providers/categories_provider.dart';
+import '../home_screen/singlecategory_widget.dart';
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:net_market/const/api_constants.dart';
-import 'package:net_market/models/productinCategoryList_model.dart';
+import 'package:net_market/models/product_model.dart';
 
 class SearchProvider extends ChangeNotifier {
-  List<ProductbyCategory> productListBySearch=[];
+  List<Product> productListBySearch=[];
 
-  Future<List<ProductbyCategory>> getproductListBySearch(String searchvalue) async {
+  Future<List<Product>> getproductListBySearch(String searchvalue) async {
     try {
       var body = jsonEncode( {
         "storeId": "${ApiConstants.STOREID}",
@@ -36,7 +36,7 @@ class SearchProvider extends ChangeNotifier {
       }
       if (response.statusCode == 200) {
         productListBySearch =
-            ProductbyCategory.productsbyCatFromSnapshot(productTempList);
+            Product.productsbyCatFromSnapshot(productTempList);
         notifyListeners();
         return productListBySearch;
       }

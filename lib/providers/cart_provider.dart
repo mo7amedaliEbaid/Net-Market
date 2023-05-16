@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/models/productinCategoryList_model.dart';
+import 'package:net_market/models/product_model.dart';
 class CartProvider extends ChangeNotifier {
-  List<ProductbyCategory> listProduct = [];
+  List<Product> listProduct = [];
   // String urlApi = ''
 
-  void add(ProductbyCategory item, int quantity) {
+  void add(Product item, int quantity) {
     for (int i = 0; i < listProduct.length; i++) {
       if (listProduct[i].name == item.name) {
         listProduct[i].quantity = listProduct[i].quantity + quantity;
@@ -12,12 +12,12 @@ class CartProvider extends ChangeNotifier {
         return;
       }
     }
-    ProductbyCategory product = ProductbyCategory.fromItem(item, 1);
+    Product product = Product.fromItem(item, 1);
     listProduct.add(product);
     notifyListeners();
   }
 
-  void updateQuantity(ProductbyCategory product, int newQuantity) {
+  void updateQuantity(Product product, int newQuantity) {
     for (int i = 0; i < listProduct.length; i++) {
       if (listProduct[i].name == product.name) {
         listProduct[i].quantity = newQuantity;
@@ -30,13 +30,13 @@ class CartProvider extends ChangeNotifier {
 
   double totalPrice() {
     double total = 0;
-    for (ProductbyCategory product in listProduct) {
+    for (Product product in listProduct) {
       total += (product.price!* product.quantity);
     }
     return total;
   }
 
-  void remove(ProductbyCategory item) {
+  void remove(Product item) {
     listProduct.remove(item);
     notifyListeners();
   }

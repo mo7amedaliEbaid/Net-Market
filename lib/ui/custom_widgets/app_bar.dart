@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/screens/search_screen/search_screen.dart';
-import '../const/global_constants.dart';
+import '../../const/global_constants.dart';
+import '../screens/search_screen/searchscreen.dart';
+
 PreferredSizeWidget MyAppBar(BuildContext context,String title){
   Size size = MediaQuery.of(context).size;
   return AppBar(

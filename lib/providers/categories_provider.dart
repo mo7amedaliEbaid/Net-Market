@@ -1,18 +1,16 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:net_market/const/api_constants.dart';
 import 'package:net_market/models/category_model.dart';
-import 'package:net_market/models/productinCategoryList_model.dart';
+import 'package:net_market/models/product_model.dart';
 
-import '../models/product_model.dart';
 
 class CategoriesProvider extends ChangeNotifier {
   List<MainCategory> maincategories = [];
-  List<ProductbyCategory> productListByCategory=[];
+  List<Product> productListByCategory=[];
 
   Future<List<MainCategory>> getallcategories() async {
     var response = await http.get(Uri.parse(
@@ -35,7 +33,7 @@ class CategoriesProvider extends ChangeNotifier {
       throw Exception('Failed to load album');
     }
   }
-  Future<List<ProductbyCategory>> getproductListByCategory(String categoryId) async {
+  Future<List<Product>> getproductListByCategory(String categoryId) async {
     try {
       var body = jsonEncode( {
         "categoryId": "${categoryId}"
@@ -59,7 +57,7 @@ class CategoriesProvider extends ChangeNotifier {
       }
       if (response.statusCode == 200) {
         productListByCategory =
-            ProductbyCategory.productsbyCatFromSnapshot(productTempList);
+            Product.productsbyCatFromSnapshot(productTempList);
         notifyListeners();
         return productListByCategory;
       }

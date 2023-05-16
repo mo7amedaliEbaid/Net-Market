@@ -5,9 +5,9 @@ import 'package:net_market/providers/darkTheme_provider.dart';
 import 'package:net_market/providers/locale_provider.dart';
 import 'package:net_market/providers/categories_provider.dart';
 import 'package:net_market/providers/search_provider.dart';
-import 'package:net_market/screens/splash/splash_screen.dart';
 import 'package:net_market/services/localization.dart';
 import 'package:net_market/theme/theme_data.dart';
+import 'package:net_market/ui/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/store_provider.dart';

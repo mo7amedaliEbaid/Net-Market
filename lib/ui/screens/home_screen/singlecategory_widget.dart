@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
 import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/providers/categories_provider.dart';
-import 'package:net_market/screens/product_screen/product_details_screen.dart';
 import 'package:provider/provider.dart';
+
+import '../../screens/product_screen/product_details_screen.dart';
 
 class SingleCategory extends StatefulWidget {
   SingleCategory({Key? key}) : super(key: key);

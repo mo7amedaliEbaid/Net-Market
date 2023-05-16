@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:net_market/const/app_constants.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/global_constants.dart';
-import '../../models/language_model.dart';
-import '../../providers/locale_provider.dart';
-import '../../services/localization.dart';
+import '../../../const/global_constants.dart';
+import '../../../models/language_model.dart';
+import '../../../providers/locale_provider.dart';
+import '../../../services/localization.dart';
 
 Widget LanguageBottomSheet(BuildContext context) {
   Locale _changeLanguage(Language language, context) {

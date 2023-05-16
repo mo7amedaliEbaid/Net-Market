@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
-import 'package:net_market/customized/app_bar.dart';
-import 'package:net_market/models/category_model.dart';
 import 'package:net_market/providers/categories_provider.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../../const/global_constants.dart';
+import '../../custom_widgets/app_bar.dart';
 import 'home_setUp.dart';
 
 class HomePage extends StatefulWidget {

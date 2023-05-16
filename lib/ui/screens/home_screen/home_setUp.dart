@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/category_model.dart';
-import '../../providers/categories_provider.dart';
-import '../home_screen//singlecategory_widget.dart';
+import '../../../models/category_model.dart';
+import '../../../providers/categories_provider.dart';
+import 'singlecategory_widget.dart';
 
 
 class HomeSetUp extends StatefulWidget {

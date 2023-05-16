@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:net_market/customized/bottom_sheets/register.dart';
-import 'package:net_market/theme/theme_data.dart';
-
-import '../../const/global_constants.dart';
-import '../../services/localization.dart';
+import 'package:net_market/ui/custom_widgets/bottom_sheets/register.dart';
+import '../../../const/global_constants.dart';
+import '../../../services/localization.dart';
 
 Widget LoginBottomSheet(BuildContext context) {
   Size size =MediaQuery.of(context).size;

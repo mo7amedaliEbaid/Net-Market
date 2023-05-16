@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:net_market/providers/search_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/api_constants.dart';
-import '../../const/global_constants.dart';
+import '../../../const/api_constants.dart';
+import '../../../const/global_constants.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

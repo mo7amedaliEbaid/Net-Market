@@ -22,8 +22,9 @@ class _SingleCategoryState extends State<SingleCategory> {
       Size size = MediaQuery.of(context).size;
       return data.productListByCategory.length == 0
           ? CircularProgressIndicator()
-          : Container(
-              height: size.height * .79,
+          : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Flexible(
               child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                  shrinkWrap: true,
@@ -82,7 +83,8 @@ class _SingleCategoryState extends State<SingleCategory> {
                       ),
                     );
                   }),
-            );
+            ),
+          );
     });
   }
 }

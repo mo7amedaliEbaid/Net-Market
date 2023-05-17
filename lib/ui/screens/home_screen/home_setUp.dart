@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
+import 'package:net_market/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/category_model.dart';
@@ -17,15 +18,13 @@ class HomeSetUp extends StatefulWidget {
 
 class _HomeSetUpState extends State<HomeSetUp> {
   late CategoriesProvider categoriesProvider;
+  int pressedAttentionIndex  = -1;
   bool _isLoading = false;
-
   @override
   void initState() {
-    // TODO: implement initState
+    categoriesProvider=Provider.of<CategoriesProvider>(context,listen: false);
+    categoriesProvider.getproductListByCategory(widget.mainCategories.first.id);
     super.initState();
-    categoriesProvider =
-        Provider.of<CategoriesProvider>(context, listen: false);
-    // categoriesProvider.getproductListByCategory(categoryId);
   }
 
   @override
@@ -40,34 +39,39 @@ class _HomeSetUpState extends State<HomeSetUp> {
               padding: EdgeInsets.symmetric(horizontal: 0),
               height: MediaQuery.of(context).size.height * .09,
               // width: MediaQuery.of(context).size.width * 2,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: widget.mainCategories.length,
-                  itemBuilder: (context, index) {
-                    return widget.mainCategories.length == 0
-                        ? Container()
-                        : InkWell(
-                            onTap: () async {
-                              setState(() {
-                                _isLoading = true;
-                              });
-                              await Future.delayed(const Duration(seconds: 8));
-                              data.getproductListByCategory(
-                                  widget.mainCategories[index].id);
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                widget.mainCategories[index].name,
-                                style: lightThemenormalStyle,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0,20,8,10),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: widget.mainCategories.length,
+                    itemBuilder: (context, index) {
+                      final pressAttention = pressedAttentionIndex == index;
+                      return widget.mainCategories.length == 0
+                          ? Container()
+                          : InkWell(
+                              onTap: () async {
+                                setState(() {
+                                  data.getproductListByCategory(
+                                      widget.mainCategories[index].id);
+                                  pressedAttentionIndex = index;
+                                  _isLoading = true;
+                                });
+                                await Future.delayed(const Duration(seconds: 6));
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  widget.mainCategories[index].name,
+                                  style:  pressAttention ? underlinedTitle: lightThemenormalStyle,
+                                ),
                               ),
-                            ),
-                          );
-                  })),
+                            );
+                    }),
+              )),
           !_isLoading
               ? SingleCategory()
               : Center(

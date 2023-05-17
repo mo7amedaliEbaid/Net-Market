@@ -14,12 +14,13 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  List<bool> strikeList = [];
-  CategoriesProvider categoriesProvider=CategoriesProvider();
+  late CategoriesProvider categoriesProvider;
+  int pressedAttentionIndex  = -1;
+  bool _isLoading = false;
   @override
   void initState() {
     categoriesProvider=Provider.of<CategoriesProvider>(context,listen: false);
-    strikeList = List.generate(categoriesProvider.maincategories.length, (index)=>false);
+   // categoriesProvider.getproductListByCategory(widget.mainCategories.first.id);
     super.initState();
   }
   @override
@@ -33,31 +34,43 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           child: Column(
             children: [
               Container(
-                height: size.height*.1,
+                height: size.height*.08,
                 width: size.width*3.5,
                 child: ListView.builder(
                   shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: catsdata.maincategories.length,
                     itemBuilder: (context,index){
+                      final pressAttention = pressedAttentionIndex == index;
                   return InkWell(
-                    onTap: (){
+                    onTap: ()async{
                       setState(() {
-                        bool temp = !strikeList[index];
-                        strikeList.removeAt(index);
-                        strikeList.insert(index, temp);
-                        catsdata.getproductListByCategory(catsdata.maincategories[index].id);
+                        catsdata.getproductListByCategory(
+                            catsdata.maincategories[index].id);
+                        pressedAttentionIndex = index;
+                        _isLoading = true;
+                      });
+                      await Future.delayed(const Duration(seconds: 6));
+                      setState(() {
+                        _isLoading = false;
                       });
 
                     },
                     child: Container(
                       margin: EdgeInsets.all(10),
-                        child: Text(catsdata.maincategories[index].name,
-                          style: strikeList[index] ? lightThemetitleStyle : lightThemenormalStyle,)),
+                        child: Text(
+                      catsdata.maincategories[index].name,
+                      style:  pressAttention ? underlinedTitle: lightThemenormalStyle,
+                      ),)
                   );
                 }),
               ),
-              Flexible(child: SingleCategory())
+              !_isLoading
+                  ? Flexible(child: SingleChildScrollView(child: SingleCategory()))
+                  : Center(
+                child: CircularProgressIndicator(),
+              )
+
             ],
           ),
         ),

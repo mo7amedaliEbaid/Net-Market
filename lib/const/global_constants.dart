@@ -14,6 +14,23 @@ TextStyle lightThemenormalStyle=TextStyle(
   fontSize: 18,
   color: Colors.blue,
 );
+TextStyle underlinedTitle=TextStyle(
+  fontWeight:FontWeight.w600,
+  fontSize: 20,
+//  color: Colors.blue,
+  shadows: [
+    Shadow(
+        color: Colors.blue,
+        offset: Offset(0, -10)),
+  ],
+  color: Colors.transparent,
+  decoration:
+  TextDecoration.underline,
+  decorationColor: Colors.blue,
+  decorationThickness: 4,
+  decorationStyle:
+  TextDecorationStyle.solid,
+);
 TextStyle greenStyle=TextStyle(
   fontWeight:FontWeight.w600,
   fontSize: 18,

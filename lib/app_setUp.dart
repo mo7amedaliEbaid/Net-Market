@@ -3,6 +3,7 @@ import 'package:net_market/ui/screens/cart_screen/cart_screen.dart';
 import 'package:net_market/ui/screens/categories_screen/categories_screen.dart';
 import 'package:net_market/ui/screens/home_screen/home_screen.dart';
 import 'package:net_market/ui/screens/myAccount/account_screen.dart';
+import 'package:net_market/ui/screens/order_screen/order_screen.dart';
 class AppSetUp extends StatefulWidget {
   const AppSetUp({Key? key}) : super(key: key);
 
@@ -17,7 +18,7 @@ class _AppSetUpState extends State<AppSetUp> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     CategoriesScreen(),
-    CartScreen(),
+    OrderScreen(),
     CartScreen(),
     AccountScreen(),
   ];

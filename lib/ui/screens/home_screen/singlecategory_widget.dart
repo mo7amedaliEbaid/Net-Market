@@ -15,17 +15,6 @@ class SingleCategory extends StatefulWidget {
 }
 
 class _SingleCategoryState extends State<SingleCategory> {
-  late CategoriesProvider categoriesProvider;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    categoriesProvider =
-        Provider.of<CategoriesProvider>(context, listen: false);
-    categoriesProvider.getproductListByCategory(categoriesProvider.maincategories.first.id);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +25,8 @@ class _SingleCategoryState extends State<SingleCategory> {
           : Container(
               height: size.height * .79,
               child: GridView.builder(
-                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                 shrinkWrap: true,
                   itemCount: data.productListByCategory.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

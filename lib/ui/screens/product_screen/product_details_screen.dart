@@ -4,8 +4,9 @@ import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/models/product_model.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
-import '../../custom_widgets/app_bar.dart';
+
 import '../../../providers/cart_provider.dart';
+import '../../custom_widgets/app_bar.dart';
 import '../../custom_widgets/dots_indicator.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -23,7 +24,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   double page = 0;
 
   PageController? pageController;
-
 
   @override
   void initState() {
@@ -45,71 +45,68 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 38, vertical: 10),
-              height: size.height * .54,
-              child:Stack(
-                children: [
-                  PageView.builder(
-                      controller: pageController,
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return Stack(
-                          children: [
-                            Container(
-                              width: size.width * .8,
-                              height: size.height * .5,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "${ApiConstants.IMAGE}${widget.chosenproduct.productPictures!.first.pictureUrl}"),
-                                      fit: BoxFit.fill)),
-                            ),
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: Icon(Icons.saved_search)),
-                                    Container(
-                                        margin: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: Icon(Icons.share)),
-                                    Container(
-                                        margin: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle
-                                        ),
-                                        child: Icon(Icons.favorite_border)),
-                                  ],
+                margin: EdgeInsets.symmetric(horizontal: 38, vertical: 10),
+                height: size.height * .54,
+                child: Stack(
+                  children: [
+                    PageView.builder(
+                        controller: pageController,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              Container(
+                                width: size.width * .8,
+                                height: size.height * .5,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            "${ApiConstants.IMAGE}${widget.chosenproduct.productPictures!.first.pictureUrl}"),
+                                        fit: BoxFit.fill)),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle),
+                                          child: Icon(Icons.saved_search)),
+                                      Container(
+                                          margin: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle),
+                                          child: Icon(Icons.share)),
+                                      Container(
+                                          margin: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle),
+                                          child: Icon(Icons.favorite_border)),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-
-                          ],
-                        );
-                      }),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    child:MyDotsIndicator( pageController!.hasClients?pageController!.page:0,), )
-                ],
-              )
-
-            ),
+                            ],
+                          );
+                        }),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: MyDotsIndicator(
+                        pageController!.hasClients ? pageController!.page : 0,
+                      ),
+                    )
+                  ],
+                )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -129,24 +126,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                   Column(
                     children: [
-                      Text("${widget.chosenproduct.price.toString()} KWD",style: greenStyle,),
-                      Text("${widget.chosenproduct.oldPrice.toString()} KWD",style: oldpriceStyle,)
+                      Text(
+                        "${widget.chosenproduct.price.toString()} KWD",
+                        style: greenStyle,
+                      ),
+                      Text(
+                        "${widget.chosenproduct.oldPrice.toString()} KWD",
+                        style: oldpriceStyle,
+                      )
                     ],
                   )
                 ],
               ),
             ),
-
-
             Container(
-              width: size.width*.35,
-              height: size.height*.05,
+              width: size.width * .35,
+              height: size.height * .05,
               decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.lightBlue.shade900,width: 2)
-              ),
-
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
+                  border:
+                      Border.all(color: Colors.lightBlue.shade900, width: 2)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -154,17 +154,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     onTap: widget.chosenproduct.quantity == 0
                         ? null
                         : () {
-                      setState(() {
-                        newquantity--;
-                        newquantity = widget.chosenproduct.quantity - 1;
-                        cartProvider.updateQuantity(
-                            widget.chosenproduct, newquantity);
-                      });
-                    },
+                            setState(() {
+                              newquantity--;
+                              newquantity = widget.chosenproduct.quantity - 1;
+                              cartProvider.updateQuantity(
+                                  widget.chosenproduct, newquantity);
+                            });
+                          },
                     child: Container(
-                      child: Icon(Icons.remove,size: 22,color: Colors.white,),
+                      child: Icon(
+                        Icons.remove,
+                        size: 22,
+                        color: Colors.white,
+                      ),
                     ),
-
                   ),
                   Container(
                     color: Colors.white,
@@ -179,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
                         newquantity = widget.chosenproduct.quantity + 1;
                         newquantity++;
@@ -188,27 +191,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       });
                     },
                     child: Container(
-                      child: Icon(Icons.add,size: 22,color: Colors.white,),
+                      child: Icon(
+                        Icons.add,
+                        size: 22,
+                        color: Colors.white,
+                      ),
                     ),
-
                   ),
                 ],
               ),
             ),
             Container(
-              width: size.width*.8,
-              height: size.height*.07,
-              margin: EdgeInsets.fromLTRB(30,50,30,5),
+              width: size.width * .8,
+              height: size.height * .07,
+              margin: EdgeInsets.fromLTRB(30, 50, 30, 5),
               decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: InkWell(onTap:(){
-                setState(() {
-                  cartProvider.add(widget.chosenproduct, newquantity);
-                });
-
-              }, child: Center(child: Text("Add To Cart",style: bigwhite,))),
+                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+              child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      cartProvider.add(widget.chosenproduct, newquantity);
+                    });
+                  },
+                  child: Center(
+                      child: Text(
+                    "Add To Cart",
+                    style: bigwhite,
+                  ))),
             )
           ],
         ),

@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )
                   : Container(
+               // margin: EdgeInsets.symmetric(horizontal: 15),
                       height: size.height * .3,
                       decoration: BoxDecoration(
                         color: Colors.blue,

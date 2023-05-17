@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:net_market/providers/cart_provider.dart';
 import 'package:net_market/providers/darkTheme_provider.dart';
+import 'package:net_market/providers/delivery_provider.dart';
 import 'package:net_market/providers/locale_provider.dart';
 import 'package:net_market/providers/categories_provider.dart';
 import 'package:net_market/providers/search_provider.dart';
@@ -19,6 +20,7 @@ main()=>runApp(
       ChangeNotifierProvider(create: (_) => StoreProvider()),
       ChangeNotifierProvider(create: (_) => SearchProvider()),
       ChangeNotifierProvider(create: (_) => CartProvider()),
+      ChangeNotifierProvider(create: (_) => DeliveryProvider()),
     ], child:  MyApp()));
 
 class MyApp extends StatefulWidget {

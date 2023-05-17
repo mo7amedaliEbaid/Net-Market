@@ -6,6 +6,8 @@ class ApiConstants{
   static const GETCATEGORY="GetCategoriesByStoreId/";
   static const GETCATEGORYLIST="GetProductListByCategoryId";
   static const GETSEARCHRESULTS= "GetProductsSearchBy";
+  static const KUWIT_ID= "61ee9ed1f77790fed7ae4c85";
+  static const GetStates= "GetStatesByCountryId";
 
 }
 

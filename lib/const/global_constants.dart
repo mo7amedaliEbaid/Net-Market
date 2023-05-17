@@ -9,6 +9,11 @@ TextStyle bigwhite=TextStyle(
   fontSize: 20,
   color: Colors.white,
 );
+TextStyle normalwhite=TextStyle(
+  fontWeight:FontWeight.w600,
+  fontSize: 16,
+  color: Colors.white,
+);
 TextStyle lightThemenormalStyle=TextStyle(
   fontWeight:FontWeight.w500,
   fontSize: 18,

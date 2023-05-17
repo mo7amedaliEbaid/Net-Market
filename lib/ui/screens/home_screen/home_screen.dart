@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
+import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/providers/categories_provider.dart';
 import 'package:net_market/providers/store_provider.dart';
+import 'package:net_market/ui/screens/delivery_screen/delivery_screen.dart';
 import 'package:provider/provider.dart';
+
 import '../../custom_widgets/app_bar.dart';
 import 'home_setUp.dart';
 
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )
                   : Container(
-               // margin: EdgeInsets.symmetric(horizontal: 15),
+                      // margin: EdgeInsets.symmetric(horizontal: 15),
                       height: size.height * .3,
                       decoration: BoxDecoration(
                         color: Colors.blue,
@@ -65,26 +68,75 @@ class _HomePageState extends State<HomePage> {
                 height: size.height * .03,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: size.height * .1,
-                    width: size.width * .355,
+                    height: size.height * .08,
+                    width: size.width * .45,
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2)),
+                        color: Colors.green,
+                        border: Border.all(color: Colors.blue, width: 2),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        "Order Date",
+                        style: normalwhite,
+                      ),
+                    ),
                   ),
-                  Container(
-                    width: size.width * .355,
-                    height: size.height * .1,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2)),
+                  SizedBox(
+                    width: size.width * .04,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DeliveryScreen()));
+                    },
+                    child: Container(
+                      width: size.width * .45,
+                      height: size.height * .08,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 5),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "Delivery to:",
+                                  style: lightThemenormalStyle,
+                                ),
+                                Text(
+                                  "Client Name",
+                                  style: lightThemetitleStyle,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: size.width * .07,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 25,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
               Consumer<CategoriesProvider>(builder: (context, catdata, _) {
-                return catdata.maincategories.length==0?
-                    CircularProgressIndicator():
-                  HomeSetUp(mainCategories: catdata.maincategories,);
+                return catdata.maincategories.length == 0
+                    ? CircularProgressIndicator()
+                    : HomeSetUp(
+                        mainCategories: catdata.maincategories,
+                      );
               }),
             ],
           ),
@@ -93,4 +145,3 @@ class _HomePageState extends State<HomePage> {
     });
   }
 }
-

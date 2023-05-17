@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
-import 'package:net_market/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/category_model.dart';

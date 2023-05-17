@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
+import 'package:net_market/ui/screens/delivery_screen/delivery_body.dart';
 
 class DeliveryScreen extends StatefulWidget {
   const DeliveryScreen({Key? key}) : super(key: key);
@@ -18,47 +19,46 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       appBar: AppBar(
         title: Text("lllllllllls"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          pickupSelected = false;
-                        });
-                      },
-                      child: Text(
-                        "Delivery",
-                        style: pickupSelected
-                            ? lightThemenormalStyle
-                            : underlinedTitle,
-                      )),
-                  SizedBox(
-                    width: size.width * .05,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          pickupSelected = true;
-                        });
-                      },
-                      child: Text(
-                        "PickUp",
-                        style: pickupSelected
-                            ? underlinedTitle
-                            : lightThemenormalStyle,
-                      ))
-                ],
-              ),
-            )
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        pickupSelected = false;
+                      });
+                    },
+                    child: Text(
+                      "Delivery",
+                      style: pickupSelected
+                          ? lightThemenormalStyle
+                          : underlinedTitle,
+                    )),
+                SizedBox(
+                  width: size.width * .05,
+                ),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        pickupSelected = true;
+                      });
+                    },
+                    child: Text(
+                      "PickUp",
+                      style: pickupSelected
+                          ? underlinedTitle
+                          : lightThemenormalStyle,
+                    ))
+              ],
+            ),
+          ),
+          DeliveryBody()
+        ],
       ),
     );
   }

@@ -4,11 +4,13 @@ import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:net_market/const/api_constants.dart';
 import 'package:net_market/models/area_model.dart';
+import 'package:net_market/models/branch_model.dart';
 
 import '../models/state_model.dart';
 class DeliveryProvider extends ChangeNotifier{
   List<CountryState> countryStates=[];
   List<StateArea> stateAreas=[];
+  List<Branch> brancheslist=[];
   Future<List<CountryState>> getstatesbyCountry() async {
     try {
       var body = jsonEncode( {
@@ -72,6 +74,31 @@ class DeliveryProvider extends ChangeNotifier{
             StateArea.areasFromSnapshot(areasTempList);
         notifyListeners();
         return stateAreas;
+      }
+    }catch(e){
+      log(e.toString());
+    }
+    throw Exception('Failed to load album');
+  }
+  Future<List<Branch>> getbranchesbyStoreId() async {
+    try {
+      var response = await http.get(Uri.parse(
+          "${ApiConstants.BASEURL}${ApiConstants.GET_BRANCHES}${ApiConstants.STOREID}"),
+      );
+      print('Response status: ${response.statusCode}');
+      log('Response body: ${response.body.toString()}');
+      var data = jsonDecode(response.body.toString());
+      List branchesTempList = [];
+      for (var v in data["Data"]) {
+        branchesTempList.add(v);
+        log(v.toString());
+        print(data["Data"].length.toString());
+      }
+      if (response.statusCode == 200) {
+        brancheslist =
+            Branch.branchesFromSnapshot(branchesTempList);
+        notifyListeners();
+        return brancheslist;
       }
     }catch(e){
       log(e.toString());

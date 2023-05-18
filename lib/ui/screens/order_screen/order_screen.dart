@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
-import 'package:net_market/ui/custom_widgets/app_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/store_provider.dart';
+import '../../app_widgets/app_bar.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);

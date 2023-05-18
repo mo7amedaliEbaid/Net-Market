@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../../../const/global_constants.dart';
 import '../../../services/localization.dart';
-import '../../custom_widgets/app_bar.dart';
 import '../../../providers/darkTheme_provider.dart';
-import '../../custom_widgets/bottom_sheets/country.dart';
-import '../../custom_widgets/bottom_sheets/language.dart';
-import '../../custom_widgets/bottom_sheets/login.dart';
+import '../../app_widgets/app_bar.dart';
+import '../../app_widgets/bottom_sheets/country.dart';
+import '../../app_widgets/bottom_sheets/language.dart';
+import '../../app_widgets/bottom_sheets/login.dart';
 import '../../theme/theme_data.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -20,10 +20,10 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
 
   Styles styles = Styles();
-
+//bool isDark=false;
   @override
   Widget build(BuildContext context) {
-    final themeState = Provider.of<DarkThemeProvider>(context);
+  //  final themeState = Provider.of<DarkThemeProvider>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: MyAppBar(context,""),
@@ -232,24 +232,30 @@ class _AccountScreenState extends State<AccountScreen> {
               height: 1,
               color: Colors.grey.shade300,
             ),
-            SwitchListTile(
-              title: Text(
-                AppLocalization.of(context)
-                    .getTranslatedValue("dark_mode")
-                    .toString(),
-                style: lightThemenormalStyle,
-              ),
-              activeColor: Colors.green,
-              inactiveThumbColor: Colors.blue,
-              activeTrackColor: Colors.grey.shade200,
-              inactiveTrackColor: Colors.grey.shade200,
-              onChanged: (bool value) {
-                setState(() {
-                  themeState.setDarkTheme = value;
-                });
-              },
-              value: themeState.getDarkTheme,
-            ),
+            Consumer<DarkThemeProvider>(builder: (context,themedata,_){
+              return  SwitchListTile(
+                title: Text(
+                  AppLocalization.of(context)
+                      .getTranslatedValue("dark_mode")
+                      .toString(),
+                  style: lightThemenormalStyle,
+                ),
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.blue,
+                activeTrackColor: Colors.grey.shade200,
+                inactiveTrackColor: Colors.grey.shade200,
+                onChanged: (bool value) {
+                  setState(() {
+                    themedata.setDarkTheme(value);
+                  //  themedata.getdarkTheme=!themedata.getdarkTheme;
+                    themedata.getdarkTheme=value;
+                    
+                  });
+                },
+                value: themedata.getdarkTheme,
+              );
+            })
+
           ],
         ),
       ),

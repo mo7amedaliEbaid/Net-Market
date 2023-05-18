@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.5
   dots_indicator: ^2.1.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,6 +73,7 @@ flutter:
     - assets/User-img@3x.png
     - assets/Country@3x.png
     - assets/Logo-static@3x.png
+    - assets/twitter@3x.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

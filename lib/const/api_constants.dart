@@ -9,6 +9,7 @@ class ApiConstants{
   static const KUWIT_ID= "61ee9ed1f77790fed7ae4c85";
   static const GetStates= "GetStatesByCountryId";
   static const GetAreas= "GetAreasByStateId";
+  static const GET_BRANCHES= "GetPickupPointsByStoreId/";
 
 }
 

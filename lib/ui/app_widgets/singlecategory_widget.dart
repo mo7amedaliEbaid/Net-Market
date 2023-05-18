@@ -4,11 +4,11 @@ import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/providers/categories_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../screens/product_screen/product_details_screen.dart';
+import '../screens/product_screen/product_details_screen.dart';
 
 class SingleCategory extends StatefulWidget {
-  SingleCategory({Key? key}) : super(key: key);
-
+  SingleCategory({Key? key, required this.isScrollable}) : super(key: key);
+final bool isScrollable;
 
   @override
   State<SingleCategory> createState() => _SingleCategoryState();
@@ -26,7 +26,9 @@ class _SingleCategoryState extends State<SingleCategory> {
             padding: const EdgeInsets.all(8.0),
             child: Flexible(
               child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: widget.isScrollable?
+                      ClampingScrollPhysics():
+                  NeverScrollableScrollPhysics(),
                  shrinkWrap: true,
                   itemCount: data.productListByCategory.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

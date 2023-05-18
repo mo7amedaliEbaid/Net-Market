@@ -3,9 +3,9 @@ import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../custom_widgets/app_bar.dart';
 import '../../../providers/categories_provider.dart';
-import '../home_screen/singlecategory_widget.dart';
+import '../../app_widgets/app_bar.dart';
+import '../../app_widgets/singlecategory_widget.dart';
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 
@@ -17,6 +17,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   late CategoriesProvider categoriesProvider;
   int pressedAttentionIndex  = -1;
   bool _isLoading = false;
+  bool scrollableGridview=true;
   @override
   void initState() {
     categoriesProvider=Provider.of<CategoriesProvider>(context,listen: false);
@@ -66,7 +67,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 }),
               ),
               !_isLoading
-                  ? Flexible(child: SingleChildScrollView(child: SingleCategory()))
+                  ? Container(
+                  height: size.height*.7,
+                  child: SingleCategory(isScrollable: scrollableGridview,))
                   : Center(
                 child: CircularProgressIndicator(),
               )

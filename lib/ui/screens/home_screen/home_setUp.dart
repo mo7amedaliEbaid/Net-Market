@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/category_model.dart';
 import '../../../providers/categories_provider.dart';
-import 'singlecategory_widget.dart';
+import '../../app_widgets/singlecategory_widget.dart';
 
 class HomeSetUp extends StatefulWidget {
   HomeSetUp({super.key, required this.mainCategories});
@@ -19,6 +19,7 @@ class _HomeSetUpState extends State<HomeSetUp> {
   late CategoriesProvider categoriesProvider;
   int pressedAttentionIndex  = -1;
   bool _isLoading = false;
+  bool scrollGridView=false;
   @override
   void initState() {
     categoriesProvider=Provider.of<CategoriesProvider>(context,listen: false);
@@ -72,7 +73,7 @@ class _HomeSetUpState extends State<HomeSetUp> {
                     }),
               )),
           !_isLoading
-              ? SingleCategory()
+              ? SingleCategory(isScrollable: scrollGridView,)
               : Center(
                   child: CircularProgressIndicator(),
                 )

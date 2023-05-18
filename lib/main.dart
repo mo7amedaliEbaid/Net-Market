@@ -12,7 +12,10 @@ import 'package:net_market/ui/theme/theme_data.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/store_provider.dart';
-main()=>runApp(
+main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await DarkThemeProvider().getTheme();
+  runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => DarkThemeProvider()),
       ChangeNotifierProvider(create: (_) => LocaleCont()),
@@ -21,7 +24,7 @@ main()=>runApp(
       ChangeNotifierProvider(create: (_) => SearchProvider()),
       ChangeNotifierProvider(create: (_) => CartProvider()),
       ChangeNotifierProvider(create: (_) => DeliveryProvider()),
-    ], child:  MyApp()));
+    ], child:  MyApp()));}
 
 class MyApp extends StatefulWidget {
    MyApp({Key? key}) : super(key: key);
@@ -31,14 +34,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DarkThemeProvider themeChangeProvider=DarkThemeProvider();
+  late DarkThemeProvider themeChangeProvider;
 Styles styles=Styles();
-  void getCurrentAppTheme()async{
+late bool isdarktheme;
+  /*void getCurrentAppTheme()async{
     themeChangeProvider.setDarkTheme=await themeChangeProvider.darkThemePrefs.getTheme();
-  }
+  }*/
   @override
   void initState() {
-    getCurrentAppTheme();
+    themeChangeProvider=Provider.of<DarkThemeProvider>(context,listen: false);
+    themeChangeProvider.getdarkTheme;
+    //getCurrentAppTheme();
     super.initState();
   }
   @override
@@ -65,7 +71,7 @@ Styles styles=Styles();
           }
           return supportedLocales.first;
         },
-        theme: styles.themeData(themedata.getDarkTheme, context),
+        theme: styles.themeData(themedata.getdarkTheme, context),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       );

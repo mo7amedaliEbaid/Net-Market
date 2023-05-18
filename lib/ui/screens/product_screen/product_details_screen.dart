@@ -6,8 +6,8 @@ import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/cart_provider.dart';
-import '../../custom_widgets/app_bar.dart';
-import '../../custom_widgets/dots_indicator.dart';
+import '../../app_widgets/app_bar.dart';
+import '../../app_widgets/dots_indicator.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key, required this.chosenproduct})

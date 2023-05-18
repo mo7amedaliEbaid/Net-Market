@@ -6,7 +6,7 @@ import 'package:net_market/providers/store_provider.dart';
 import 'package:net_market/ui/screens/delivery_screen/delivery_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../custom_widgets/app_bar.dart';
+import '../../app_widgets/app_bar.dart';
 import 'home_setUp.dart';
 
 class HomePage extends StatefulWidget {

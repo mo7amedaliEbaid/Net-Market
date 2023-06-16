@@ -8,6 +8,7 @@ import 'package:net_market/ui/screens/delivery_screen/delivery_screen.dart';
 import 'package:net_market/ui/screens/orderTime_screen/orderTime_screen.dart';
 import 'package:net_market/ui/screens/order_screen/order_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../const/global_constants.dart';
 import '../../../providers/darkTheme_provider.dart';
@@ -28,6 +29,8 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   Styles styles = Styles();
+
+
 
 //bool isDark=false;
   @override
@@ -79,6 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             /*  SizedBox(
                             height: size.height * .02,
                           ),*/
+                           //   getuser()==null?
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -108,7 +112,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   ),
                                 ),*/
                               ],
-                            ),
+                            )/*:Container(),*/
                           ],
                         ),
                       ),

@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                         fit: BoxFit.fill,
                         errorBuilder: (context, error, stackTrace) =>
                             Image.asset(
-                          "assets/Logo-static@3x.png",
+                          "assets/cover.jpg",
                           fit: BoxFit.fill,
                         ),
                       ),

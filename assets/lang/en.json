@@ -1,6 +1,6 @@
 {
   "title": "Ebaid Store",
-  "welcome_to_s" : "Welcome To Ebaid Store",
+  "welcome_to_s" : "Welcome To Our Store",
   "login": "LOG IN",
   "signup":"SIGN UP",
   "country":"Country",
@@ -10,7 +10,7 @@
   "search":"Search",
   "language" : "Language",
   "currency": "Currency",
-  "about_ebaid_store":"About Ebaid Store",
+  "about_ebaid_store":"About Our Store",
   "enter_your_email":"Type Your Email",
   "password":"Password",
   "type_your_password":"Type Your Password",

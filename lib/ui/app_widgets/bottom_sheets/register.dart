@@ -1,12 +1,25 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:net_market/const/app_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../const/global_constants.dart';
 import '../../../services/localization.dart';
 
 Widget RegisterBottomSheet(BuildContext context) {
   Size size = MediaQuery.of(context).size;
-  void _countrymodalBottomSheetMenu() {
+  TextEditingController controller=TextEditingController();
+  GlobalKey<FormState> regformKey = GlobalKey<FormState>();
+  register(BuildContext context, String username) async {
+    if (regformKey.currentState!.validate()) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("username", username);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              "You Registered Successfully")));
+      Navigator.pop(context);
+    }
+  }
+  void countrymodalBottomSheetMenu() {
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -155,30 +168,33 @@ Widget RegisterBottomSheet(BuildContext context) {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  height: size.height * .08,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border:
-                                        Border.all(color: Colors.green, width: 2),
-                                  ),
-                                  child: TextFormField(
-                                    validator: (String? value) {
-                                      if (value == null) {
-                                        return 'Please Enter Your Required UserName';
-                                      } else if (value.isEmpty) {
-                                        return 'Please Enter Your Required Password';
-                                      }
-                                    },
-                                    // controller: emailController,
-                                    decoration: InputDecoration(
-                                      errorStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
+                                Form(
+                                  key: regformKey,
+                                  child: Container(
+                                    height: size.height * .08,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border:
+                                          Border.all(color: Colors.green, width: 2),
+                                    ),
+                                    child: TextFormField(
+                                      validator: (String? value) {
+                                        if (value == null) {
+                                          return 'Please Enter Your Required UserName';
+                                        } else if (value.isEmpty) {
+                                          return 'Please Enter Your Required Password';
+                                        }
+                                      },
+                                      // controller: emailController,
+                                      decoration: InputDecoration(
+                                        errorStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                        ),
+                                        hintText: AppLocalization.of(context)
+                                            .getTranslatedValue("enter_your_email")
+                                            .toString(),
                                       ),
-                                      hintText: AppLocalization.of(context)
-                                          .getTranslatedValue("enter_your_email")
-                                          .toString(),
                                     ),
                                   ),
                                 ),
@@ -194,7 +210,7 @@ Widget RegisterBottomSheet(BuildContext context) {
                                 SizedBox(
                                   height: size.height * .01,
                                 ),
-                                Container(
+                          /*      Container(
                                   height: size.height * .08,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
@@ -233,7 +249,7 @@ Widget RegisterBottomSheet(BuildContext context) {
                                 ),
                                 SizedBox(
                                   height: size.height * .01,
-                                ),
+                                ),*/
                                 Container(
                                   height: size.height * .08,
                                   decoration: BoxDecoration(
@@ -242,6 +258,7 @@ Widget RegisterBottomSheet(BuildContext context) {
                                         Border.all(color: Colors.green, width: 2),
                                   ),
                                   child: TextFormField(
+                                    controller: controller,
                                     validator: (String? value) {
                                       if (value == null) {
                                         return 'Please Enter Your Required Password';
@@ -277,9 +294,9 @@ Widget RegisterBottomSheet(BuildContext context) {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    /* setState(() {
-                        ontapLogin();
-                      });*/
+                                    setState(() {
+                        register(context, controller.text.toString().trim());
+                      });
                                   },
                                   child: Container(
                                     height: size.height * .08,
@@ -289,7 +306,7 @@ Widget RegisterBottomSheet(BuildContext context) {
                                     child: Center(
                                       child: Text(
                                         AppLocalization.of(context)
-                                            .getTranslatedValue("login")
+                                            .getTranslatedValue("register")
                                             .toString(),
                                         style:bigwhite,
                                       ),
@@ -325,9 +342,23 @@ Widget RegisterBottomSheet(BuildContext context) {
         });
   }
 
+  gotohome(BuildContext context, String user) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var username = prefs.getString("username");
+    print("fffffffffffffffffffffffffffffff");
+    username != null
+        ?     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+            "You Already Have Account Login ")))
+
+        :countrymodalBottomSheetMenu();
+
+  }
   return InkWell(
     onTap: () {
-      _countrymodalBottomSheetMenu();
+      gotohome(context, controller.text.trim().toString());
+   //   countrymodalBottomSheetMenu();
       //Navigator.pop(context);
     },
     child:Container(

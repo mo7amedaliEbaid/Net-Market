@@ -30,7 +30,13 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<StoreProvider>(builder: (context, storedata, _) {
-      return Scaffold(
+      return storedata.store.name==null?
+          Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ):
+        Scaffold(
         appBar: MyAppBar(context, storedata.store.name!,true,false),
         body: Consumer<CategoriesProvider>(builder: (context, data, _) {
           Size size = MediaQuery.of(context).size;

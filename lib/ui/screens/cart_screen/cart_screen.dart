@@ -165,8 +165,8 @@ class _CartScreenState extends State<CartScreen> {
 
   buildProductCard(BuildContext context, Product product) {
     Size size=MediaQuery.of(context).size;
-    final _random = new Random();
-    String element = Appconstants.alternativeimags[_random.nextInt(Appconstants.alternativeimags.length)];
+    //final _random = new Random();
+   // String element = Appconstants.alternativeimags[_random.nextInt(Appconstants.alternativeimags.length)];
     return Container(
       width:size.width,
       height: size.height * 0.35,
@@ -181,7 +181,7 @@ class _CartScreenState extends State<CartScreen> {
               "${ApiConstants.IMAGE}${product.productPictures!.first.pictureUrl}",
               fit: BoxFit.fill,
               errorBuilder: (context,error,stacktrace)=>
-                  Image.asset("${element}",fit: BoxFit.fill,)
+                  Image.asset("${Appconstants.alternativeimags.first}",fit: BoxFit.fill,)
               ,
             ),
           ),
@@ -230,7 +230,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Container(
-                  height: 40,
+                  height: 35,
                   // width: size.width*.5,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

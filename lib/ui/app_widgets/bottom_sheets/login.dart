@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../const/global_constants.dart';
 import '../../../services/localization.dart';
 import '../../app_widgets/bottom_sheets/register.dart';
 
 Widget LoginBottomSheet(BuildContext context) {
   Size size =MediaQuery.of(context).size;
-  void _countrymodalBottomSheetMenu() {
+
+  GlobalKey<FormState> logformKey = GlobalKey<FormState>();
+TextEditingController controller=TextEditingController();
+  void countrymodalBottomSheetMenu() {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -47,30 +51,34 @@ Widget LoginBottomSheet(BuildContext context) {
                             .toString(),
                           style: lightThemenormalStyle,),
                         SizedBox(height: size.height*.01,),
-                         Container(
-                             height: size.height*.08,
-                           decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(5),
-                             border: Border.all(color: Colors.green,width: 2),
-                           ),
-                           child: TextFormField(
-                             validator: (String? value) {
-                               if (value == null) {
-                                 return 'Please Enter Your Required UserName';
-                               } else if (value.isEmpty) {
-                                 return 'Please Enter Your Required Password';
-                               }
-                             },
-                            // autofocus: true,
-                             // controller: emailController,
-                             decoration: InputDecoration(
-                                 errorStyle: TextStyle(
-                                   color: Colors.black,
-                                   fontSize: 14,
-                                 ),
-                                 hintText: AppLocalization.of(context)
-                                     .getTranslatedValue("enter_your_email")
-                                     .toString(),
+                         Form(
+                           key: logformKey,
+                           child: Container(
+                               height: size.height*.08,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(5),
+                               border: Border.all(color: Colors.green,width: 2),
+                             ),
+                             child: TextFormField(
+                               controller: controller,
+                               validator: (String? value) {
+                                 if (value == null) {
+                                   return 'Please Enter Your Required UserName';
+                                 } else if (value.isEmpty) {
+                                   return 'Please Enter Your Required Password';
+                                 }
+                               },
+                              // autofocus: true,
+                               // controller: emailController,
+                               decoration: InputDecoration(
+                                   errorStyle: TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 14,
+                                   ),
+                                   hintText: AppLocalization.of(context)
+                                       .getTranslatedValue("enter_your_email")
+                                       .toString(),
+                               ),
                              ),
                            ),
                          ),
@@ -183,8 +191,23 @@ Widget LoginBottomSheet(BuildContext context) {
         );
       });
       }
+  gotohome(BuildContext context, String user) async {
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var username = prefs.getString("username");
+      print("fffffffffffffffffffffffffffffff");
+      username == null
+          ?     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              "You Dont Have Account Register First")))
+
+          :countrymodalBottomSheetMenu();
+
+  }
       return InkWell(
-      onTap: _countrymodalBottomSheetMenu,
+      onTap: (){
+        gotohome(context, controller.text.toString().trim());
+      },
       child: Container(
         // height: size.height*.085,
         //  width: size.width*.25,

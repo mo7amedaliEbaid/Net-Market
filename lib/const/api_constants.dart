@@ -1,5 +1,10 @@
+import 'dart:async';
+import 'dart:async';
+
+
 class ApiConstants{
   static const BASEURL="https://finaltest.mataajer.co/odata/MobileAPI/";
+ static const BASEURL2= "https://www.mataajer.me/odata/MobileAPI/";
   static const STORE="GetCurrentStore";
   static const STOREID="63ba62e8844348f6ae5b3ce5";
   static const IMAGE="https://www.mataajer.me";

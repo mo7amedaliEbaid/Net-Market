@@ -37,10 +37,10 @@ class _HomeSetUpState extends State<HomeSetUp> {
               margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
               //  color: Colors.transparent,
               padding: EdgeInsets.symmetric(horizontal: 0),
-              height: MediaQuery.of(context).size.height * .09,
+              height: MediaQuery.of(context).size.height * .08,
               // width: MediaQuery.of(context).size.width * 2,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0,20,8,10),
+                padding: const EdgeInsets.fromLTRB(8.0,10,8,0),
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -75,7 +75,10 @@ class _HomeSetUpState extends State<HomeSetUp> {
           !_isLoading
               ? SingleCategory(isScrollable: scrollGridView,)
               : Center(
-                  child: CircularProgressIndicator(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(70.0),
+                    child: CircularProgressIndicator(),
+                  ),
                 )
         ],
       );

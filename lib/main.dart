@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:net_market/app_setUp.dart';
 import 'package:net_market/providers/cart_provider.dart';
 import 'package:net_market/providers/darkTheme_provider.dart';
 import 'package:net_market/providers/delivery_provider.dart';
@@ -42,10 +44,15 @@ late bool isdarktheme;
   }*/
   @override
   void initState() {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
     themeChangeProvider=Provider.of<DarkThemeProvider>(context,listen: false);
     themeChangeProvider.getdarkTheme;
-    //getCurrentAppTheme();
     super.initState();
+
+    //getCurrentAppTheme();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -73,7 +80,7 @@ late bool isdarktheme;
         },
         theme: styles.themeData(themedata.getdarkTheme, context),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: AppSetUp(),
       );
     });
   }

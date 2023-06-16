@@ -2,7 +2,7 @@ class Branch {
  // String id;
   String name;
   String description;
- // dynamic imageUrl;
+ dynamic? imageUrl;
 //  double latitude;
 //  double longitude;
  // Address address;
@@ -11,7 +11,7 @@ class Branch {
   //  required this.id,
     required this.name,
     required this.description,
-   // this.imageUrl,
+    this.imageUrl,
    // required this.latitude,
   //  required this.longitude,
  //   required this.address,
@@ -21,7 +21,7 @@ class Branch {
     //id: json["Id"],
     name: json["Name"],
     description: json["Description"],
-   // imageUrl: json["ImageURL"],
+   imageUrl: json["ImageURL"]??null,
    // latitude: json["Latitude"]?.toDouble(),
    // longitude: json["Longitude"]?.toDouble(),
    // address: Address.fromJson(json["Address"]),

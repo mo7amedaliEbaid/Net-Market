@@ -3,7 +3,7 @@ class MainCategory {
   String name;
   String description;
   String bottomDescription;
-  String pictureUrl;
+  String? pictureUrl;
   dynamic icon;
   String pictureId;
 
@@ -12,7 +12,7 @@ class MainCategory {
     required this.name,
     required this.description,
     required this.bottomDescription,
-    required this.pictureUrl,
+     this.pictureUrl,
     this.icon,
     required this.pictureId,
   });
@@ -22,7 +22,7 @@ class MainCategory {
     name: json["Name"],
     description: json["Description"],
     bottomDescription: json["BottomDescription"],
-    pictureUrl: json["PictureURL"],
+    pictureUrl: json["PictureURL"]??null,
     icon: json["Icon"],
     pictureId: json["PictureId"],
   );

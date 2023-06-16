@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:net_market/services/localization.dart';
+import 'package:net_market/ui/screens/account_screens/account_screen.dart';
 import 'package:net_market/ui/screens/cart_screen/cart_screen.dart';
-import 'package:net_market/ui/screens/categories_screen/categories_screen.dart';
+import 'package:net_market/ui/screens/categories_screen/MianCategories_screen.dart';
 import 'package:net_market/ui/screens/home_screen/home_screen.dart';
-import 'package:net_market/ui/screens/myAccount/account_screen.dart';
 import 'package:net_market/ui/screens/order_screen/order_screen.dart';
 class AppSetUp extends StatefulWidget {
   const AppSetUp({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _AppSetUpState extends State<AppSetUp> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    CategoriesScreen(),
+    MainCategoriesScreen(),
     OrderScreen(),
     CartScreen(),
     AccountScreen(),
@@ -35,7 +36,9 @@ class _AppSetUpState extends State<AppSetUp> {
         title: Text('Store Name'),
       ),*/
       bottomNavigationBar: Container(
+        height: 80,
         decoration: const BoxDecoration(
+          color: Colors.white,
           border: Border(top: BorderSide(color: Colors.black, width: 1.0),
           ),),
         child: BottomNavigationBar(
@@ -44,10 +47,12 @@ class _AppSetUpState extends State<AppSetUp> {
           backgroundColor: Colors.red,
           fixedColor: Colors.red,*/
             items:  <BottomNavigationBarItem>[
-              const BottomNavigationBarItem(
+               BottomNavigationBarItem(
                 activeIcon: Icon(Icons.home),
                 icon:Icon(Icons.home_outlined),
-                label: 'Home',
+                label: AppLocalization.of(context)
+                    .getTranslatedValue("home")
+                    .toString(),
                 backgroundColor: Colors.white,
               ),
               const BottomNavigationBarItem(
@@ -75,7 +80,7 @@ class _AppSetUpState extends State<AppSetUp> {
             currentIndex: _selectedIndex,
             selectedItemColor: Colors.blue,
             unselectedItemColor: Colors.blue,
-            iconSize: 40,
+            iconSize: 35,
             onTap: _onItemTapped,
             elevation: 50
         ),

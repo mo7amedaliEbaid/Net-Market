@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 TextStyle lightThemetitleStyle=TextStyle(
   fontWeight:FontWeight.w600,
-  fontSize: 20,
+  fontSize: 17,
   color: Colors.blue,
 );
 TextStyle bigwhite=TextStyle(
   fontWeight:FontWeight.w600,
-  fontSize: 20,
+  fontSize: 18,
   color: Colors.white,
 );
 TextStyle normalwhite=TextStyle(
   fontWeight:FontWeight.w600,
-  fontSize: 16,
+  fontSize: 15,
   color: Colors.white,
 );
 TextStyle lightThemenormalStyle=TextStyle(
   fontWeight:FontWeight.w500,
-  fontSize: 18,
+  fontSize: 16,
   color: Colors.blue,
 );
 TextStyle underlinedTitle=TextStyle(
   fontWeight:FontWeight.w600,
-  fontSize: 20,
+  fontSize: 18,
 //  color: Colors.blue,
   shadows: [
     Shadow(
@@ -38,12 +38,12 @@ TextStyle underlinedTitle=TextStyle(
 );
 TextStyle greenStyle=TextStyle(
   fontWeight:FontWeight.w600,
-  fontSize: 18,
+  fontSize: 16,
   color: Colors.green,
 );
 TextStyle oldpriceStyle=TextStyle(
   fontWeight:FontWeight.bold,
-  fontSize: 17,
+  fontSize: 15,
   color: Colors.blue,
   decoration: TextDecoration.lineThrough,
   decorationStyle: TextDecorationStyle.solid,

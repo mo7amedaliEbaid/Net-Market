@@ -6,7 +6,9 @@ import 'package:net_market/providers/store_provider.dart';
 import 'package:net_market/ui/screens/delivery_screen/delivery_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/localization.dart';
 import '../../app_widgets/app_bar.dart';
+import '../orderTime_screen/orderTime_screen.dart';
 import 'home_setUp.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,10 +38,9 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return Consumer<StoreProvider>(builder: (context, data, _) {
       return Scaffold(
-        appBar: MyAppBar(context, data.store.name ?? ""),
+        appBar: MyAppBar(context, data.store.name ?? "", true, false),
         body: SingleChildScrollView(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               data.store.bannar == null
                   ? Container(
@@ -54,33 +55,43 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )
                   : Container(
-                      // margin: EdgeInsets.symmetric(horizontal: 15),
                       height: size.height * .3,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "${ApiConstants.IMAGE}${data.store.bannar}"),
-                            fit: BoxFit.contain),
+                      color: Colors.blue,
+                      child: Image.network(
+                        "${ApiConstants.IMAGE}${data.store.bannar}",
+                        fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          "assets/Logo-static@3x.png",
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
               SizedBox(
-                height: size.height * .03,
+                height: size.height * 0,
               ),
-              Row(
+              /*Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: size.height * .08,
-                    width: size.width * .45,
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        border: Border.all(color: Colors.blue, width: 2),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                      child: Text(
-                        "Order Date",
-                        style: normalwhite,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OrderTimeScreen()));
+                    },
+                    child: Container(
+                      height: size.height * .08,
+                      width: size.width * .45,
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          border: Border.all(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                        child: Text(
+                          AppLocalization.of(context)
+                              .getTranslatedValue("order_time")
+                              .toString(),
+                          style: normalwhite,
+                        ),
                       ),
                     ),
                   ),
@@ -102,23 +113,27 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 5),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Delivery to:",
+                                  AppLocalization.of(context)
+                                      .getTranslatedValue("delivery_to")
+                                      .toString(),
                                   style: lightThemenormalStyle,
                                 ),
-                                Text(
-                                  "Client Name",
-                                  style: lightThemetitleStyle,
+                                Expanded(
+                                  child: Text(
+                                    AppLocalization.of(context)
+                                        .getTranslatedValue("client_name")
+                                        .toString(),
+                                    style: lightThemetitleStyle,
+                                  ),
                                 )
                               ],
-                            ),
-                            SizedBox(
-                              width: size.width * .07,
                             ),
                             Icon(
                               Icons.arrow_forward_ios,
@@ -130,10 +145,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
               Consumer<CategoriesProvider>(builder: (context, catdata, _) {
                 return catdata.maincategories.length == 0
-                    ? CircularProgressIndicator()
+                    ? Padding(
+                      padding: const EdgeInsets.all(88.0),
+                      child: CircularProgressIndicator(),
+                    )
                     : HomeSetUp(
                         mainCategories: catdata.maincategories,
                       );

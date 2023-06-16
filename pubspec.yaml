@@ -42,6 +42,11 @@ dependencies:
   dropdown_button2: ^2.0.0
   http: ^0.13.5
   dots_indicator: ^2.1.0
+  syncfusion_flutter_datepicker: "20.4.44"
+  pay: ^1.1.0
+  url_launcher: ^6.1.10
+
+
 
 
 dev_dependencies:
@@ -74,6 +79,12 @@ flutter:
     - assets/Country@3x.png
     - assets/Logo-static@3x.png
     - assets/twitter@3x.png
+    - assets/brokenImage.png
+    - assets/bracherror.jpg
+    - assets/roasted/
+    - assets/cats/
+    - assets/social/
+    - assets/pay.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

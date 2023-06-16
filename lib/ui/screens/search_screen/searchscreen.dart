@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:net_market/app_setUp.dart';
+import 'package:net_market/const/app_constants.dart';
 import 'package:net_market/providers/search_provider.dart';
+import 'package:net_market/ui/screens/home_screen/home_screen.dart';
+import 'package:net_market/ui/screens/product_screen/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/api_constants.dart';
@@ -15,9 +19,11 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   late SearchProvider searchProvider;
   TextEditingController _controller = TextEditingController();
-
+bool isloading=false;
+late bool ftime;
   @override
   void initState() {
+    ftime=true;
     searchProvider = Provider.of<SearchProvider>(context, listen: false);
     super.initState();
   }
@@ -32,35 +38,58 @@ class _SearchScreenState extends State<SearchScreen> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.blue.shade900,
+                prefixIcon: InkWell(
+                  onTap: (){
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>AppSetUp()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
                 hintText: "Search Products",
                 suffixIcon: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: InkWell(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => _controller.clear(),
                       child: Icon(Icons.clear)),
                 ),
               ),
+              onChanged: (String searchvalue){
+                setState(() {
+                  isloading==true;
+                  ftime==false;
+                });
+              },
               onSubmitted: (String searchvalue) {
                 setState(() {
                   searchProvider.getproductListBySearch(searchvalue);
+                  ftime==false;
                 });
               },
             ),
             Consumer<SearchProvider>(builder: (context, data, _) {
-              return data.productListBySearch.length == 0
+              print(data.productListBySearch.length .toString());
+              return data.productListBySearch.length == 0||ftime==false
                   ? Center(
-                child: Text("Search Your Favourite Products",style: lightThemenormalStyle,),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(78.0),
+                      child: Text("Search Your Favourite Products",style: lightThemenormalStyle,),
+                    ),
+                    Padding(padding: EdgeInsets.all(10),
+                      child: CircularProgressIndicator(color: Colors.blue,),
+                    )
+                  ],
+                ),
               )
                   : Flexible(
                     child: Container(
-                       // height: size.height * .79,
+                      margin: EdgeInsets.all(8),
                         child: GridView.builder(
                             shrinkWrap: true,
                             itemCount: data.productListBySearch.length,
@@ -83,16 +112,25 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Container(
-                                      height: size.height * .25,
-                                      width: size.width * .44,
-                                      decoration: BoxDecoration(
-                                          // border:Border.all(color: Colors.amber,width: 1),
-                                          // borderRadius: BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "${ApiConstants.IMAGE}${data.productListBySearch[index].productPictures![index].pictureUrl}"),
-                                              fit: BoxFit.fill)),
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>ProductDetailsScreen(chosenproduct: data.productListBySearch[index])));
+                                      },
+                                      child: Container(
+                                        height: size.height * .25,
+                                        width: size.width * .44,
+                                        decoration: BoxDecoration(
+                                            // border:Border.all(color: Colors.amber,width: 1),
+                                            // borderRadius: BorderRadius.circular(10),
+                                           /* image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "${ApiConstants.IMAGE}${data.productListBySearch[index].productPictures![index].pictureUrl}"),
+                                                fit: BoxFit.fill)),*/
+                                      ),
+                                      child: Image.network("${ApiConstants.IMAGE}${data.productListBySearch[index].productPictures!.first.pictureUrl}",fit: BoxFit.fill,errorBuilder:
+                                      (context,error, stackTrace)=>Image.asset("${Appconstants.alternativeimags[index]}")
+                                        ,),
+                                      ),
                                     ),
                                     Container(
                                       width: size.width * .44,

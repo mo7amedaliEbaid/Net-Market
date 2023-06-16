@@ -44,6 +44,13 @@ class Product {
    productPictures: List<ProductPicture>.from(json["ProductPictures"].map((x) => ProductPicture.fromJson(x))),
    // productAttribute: List<ProductAttribute>.from(json["ProductAttribute"].map((x) => ProductAttribute.fromJson(x))),
   );
+ Map<String, dynamic> toJson() => {
+   "Id": id,
+   "Name": name,
+   "Price": price,
+   "OldPrice": oldPrice,
+   //"avatar": avatar,
+ };
 
   static List<Product> productsbyCatFromSnapshot(List productsByCatSnapshot) {
     return productsByCatSnapshot.map((json) {

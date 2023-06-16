@@ -4,7 +4,9 @@ import 'package:net_market/const/global_constants.dart';
 import 'package:net_market/models/product_model.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../const/app_constants.dart';
 import '../../../providers/cart_provider.dart';
 import '../../app_widgets/app_bar.dart';
 import '../../app_widgets/dots_indicator.dart';
@@ -22,11 +24,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   late CartProvider cartProvider;
   int newquantity = 0;
   double page = 0;
-
   PageController? pageController;
 
   @override
   void initState() {
+    /*Product item=cartProvider.listProduct.forEach((element) {
+      list2.indexWhere((user) => user.name == element.name && user.id == element.id);
+    });*/
+
     pageController = PageController(initialPage: 0)
       ..addListener(() {
         setState(() {});
@@ -40,7 +45,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Size size = MediaQuery.of(context).size;
     return Consumer<StoreProvider>(builder: (context, data, _) {
       return Scaffold(
-        appBar: MyAppBar(context, data.store.name!),
+        appBar: MyAppBar(context, data.store.name!, true, false),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -59,13 +64,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 width: size.width * .8,
                                 height: size.height * .5,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            "${ApiConstants.IMAGE}${widget.chosenproduct.productPictures!.first.pictureUrl}"),
-                                        fit: BoxFit.fill)),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Image.network(
+                                  "${ApiConstants.IMAGE}${widget.chosenproduct.productPictures!.first.pictureUrl}",
+                                  fit: BoxFit.fill,
+                                  errorBuilder: (context,error, stackTrace)=>
+                                  Image.asset("${Appconstants.alternativeimags[index]}",fit: BoxFit.fill,),
+                                ),
                               ),
-                              Positioned(
+                            /*  Positioned(
                                 top: 0,
                                 right: 0,
                                 child: Padding(
@@ -93,7 +101,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ],
                                   ),
                                 ),
-                              ),
+                              ),*/
                             ],
                           );
                         }),
@@ -118,7 +126,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     height: size.height * .08,
                     child: Text(
                       widget.chosenproduct.shortDescription ??
-                          "short description test yyyyyy yyyypppp ppppp",
+                          "short description test short description test",
                       style: lightThemenormalStyle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -139,7 +147,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ],
               ),
             ),
-            Container(
+            /*Container(
               width: size.width * .35,
               height: size.height * .05,
               decoration: BoxDecoration(
@@ -147,60 +155,66 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   borderRadius: BorderRadius.circular(10),
                   border:
                       Border.all(color: Colors.lightBlue.shade900, width: 2)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  InkWell(
-                    onTap: widget.chosenproduct.quantity == 0
+              child:Consumer<CartProvider>(builder: (context,cartdata,_){
+
+                return  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    InkWell(
+                      onTap: *//*widget.chosenproduct.quantity == 0
                         ? null
-                        : () {
-                            setState(() {
-                              newquantity--;
-                              newquantity = widget.chosenproduct.quantity - 1;
-                              cartProvider.updateQuantity(
-                                  widget.chosenproduct, newquantity);
-                            });
-                          },
-                    child: Container(
-                      child: Icon(
-                        Icons.remove,
-                        size: 22,
-                        color: Colors.white,
+                        : *//*
+                          () {
+                        setState(() {
+                          //  newquantity --;
+                          int  newquantity = widget.chosenproduct.quantity - 1;
+                          cartdata.updateQuantity(
+                              widget.chosenproduct, newquantity);
+                        });
+                      },
+                      child: Container(
+                        child: Icon(
+                          Icons.remove,
+                          size: 22,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    width: 45,
-                    margin: EdgeInsets.symmetric(),
-                    padding: const EdgeInsets.all(10),
-                    child: Center(
-                      child: Text(
-                        newquantity.toString(),
-                        style: Theme.of(context).textTheme.bodyText1,
+                    Container(
+                      color: Colors.white,
+                      width: 45,
+                      margin: EdgeInsets.symmetric(),
+                      padding: const EdgeInsets.all(10),
+                      child: Center(
+                        child: Text(
+                //widget.chosenproduct.quantity.toString(),
+                          newquantity.toString(),
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        newquantity = widget.chosenproduct.quantity + 1;
-                        newquantity++;
-                        cartProvider.updateQuantity(
-                            widget.chosenproduct, newquantity);
-                      });
-                    },
-                    child: Container(
-                      child: Icon(
-                        Icons.add,
-                        size: 22,
-                        color: Colors.white,
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          newquantity = widget.chosenproduct.quantity + 1;
+                          newquantity ++;
+                          cartProvider.updateQuantity(
+                              widget.chosenproduct, newquantity);
+                        });
+                      },
+                      child: Container(
+                        child: Icon(
+                          Icons.add,
+                          size: 22,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
+                  ],
+                );
+      }),
+
+            ),*/
             Container(
               width: size.width * .8,
               height: size.height * .07,
@@ -210,6 +224,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: InkWell(
                   onTap: () {
                     setState(() {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              "Item Added to cart successfully")));
+                      print("id==================================${widget.chosenproduct.id}");
                       cartProvider.add(widget.chosenproduct, newquantity);
                     });
                   },

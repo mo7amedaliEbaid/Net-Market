@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
+import 'package:net_market/providers/delivery_provider.dart';
 import 'package:net_market/providers/store_provider.dart';
 import 'package:net_market/ui/screens/delivery_screen/delivery_body.dart';
 import 'package:net_market/ui/screens/delivery_screen/pickup_body.dart';
@@ -18,7 +19,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Consumer<StoreProvider>(builder: (context,data,_){
+    return Consumer2<StoreProvider,DeliveryProvider>(builder: (context,data,deliverydata,_){
       return Scaffold(
         appBar: AppBar(
           title: Text(data.store.name!),
@@ -51,6 +52,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         onTap: () {
                           setState(() {
                             pickupSelected = true;
+                       deliverydata.getbranchesbyStoreId();
                           });
                         },
                         child: Text(

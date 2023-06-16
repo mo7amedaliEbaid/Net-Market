@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.net_market">
    <application
-        android:label="net_market"
+        android:label="Net Market"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ecco_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

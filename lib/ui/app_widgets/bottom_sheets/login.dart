@@ -12,9 +12,9 @@ Widget LoginBottomSheet(BuildContext context) {
       builder: (builder) {
         return Container(
           height: size
-              .height * .75,
+              .height * .9,
           color: Colors.transparent,
-          child: new Container(
+          child:  Container(
             decoration: new BoxDecoration(
                 color: Colors.white,
                 borderRadius: new BorderRadius.only(
@@ -50,7 +50,7 @@ Widget LoginBottomSheet(BuildContext context) {
                          Container(
                              height: size.height*.08,
                            decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(10),
+                             borderRadius: BorderRadius.circular(5),
                              border: Border.all(color: Colors.green,width: 2),
                            ),
                            child: TextFormField(
@@ -61,6 +61,7 @@ Widget LoginBottomSheet(BuildContext context) {
                                  return 'Please Enter Your Required Password';
                                }
                              },
+                            // autofocus: true,
                              // controller: emailController,
                              decoration: InputDecoration(
                                  errorStyle: TextStyle(
@@ -82,8 +83,8 @@ Widget LoginBottomSheet(BuildContext context) {
                         Container(
                           height: size.height*.08,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                           border: Border.all(color: Colors.green,width: 2),
+                            borderRadius: BorderRadius.circular(5),
+                           border: Border.all(color: Colors.green,width: 3),
                           ),
                           child: TextFormField(
                             validator: (String? value) {
@@ -155,7 +156,18 @@ Widget LoginBottomSheet(BuildContext context) {
                         SizedBox(
                           height: size.height*.01,
                         ),
-                        RegisterBottomSheet(context),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              AppLocalization.of(context)
+                                  .getTranslatedValue("dont_have_account")
+                                  .toString(),
+                              style: lightThemenormalStyle,
+                            ),
+                            RegisterBottomSheet(context),
+                          ],
+                        ),
                        // RegisterBottomSheet(context),
                         SizedBox(
                           height: size.height*.01,

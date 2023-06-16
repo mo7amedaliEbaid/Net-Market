@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_market/const/global_constants.dart';
+import 'package:net_market/ui/screens/delivery_screen/delivery_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/store_provider.dart';
@@ -13,7 +14,7 @@ class OrderScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Consumer<StoreProvider>(builder: (context, storedata, _) {
       return Scaffold(
-        appBar: MyAppBar(context, storedata.store.name!),
+        appBar: MyAppBar(context, storedata.store.name!,true,false),
         body: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(
@@ -43,22 +44,23 @@ class OrderScreen extends StatelessWidget {
                       border: InputBorder.none, hintText: "Enter Order Code"),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  //width: size.width * .8,
-                  //height: size.height * .07,
-                  margin: EdgeInsets.fromLTRB(0, 170, 0, 15),
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: InkWell(
-                      onTap: () {},
-                      child: Center(
-                          child: Text(
-                        "Order look up".toUpperCase(),
-                        style: bigwhite,
-                      ))),
-                ),
+              Container(
+                height: 50,
+                //width: size.width * .8,
+                //height: size.height * .07,
+                margin: EdgeInsets.fromLTRB(0, 170, 0, 15),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10)),
+                child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DeliveryScreen()));
+                    },
+                    child: Center(
+                        child: Text(
+                      "Order look up".toUpperCase(),
+                      style: bigwhite,
+                    ))),
               )
             ],
           ),

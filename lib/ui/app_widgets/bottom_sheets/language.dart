@@ -26,7 +26,8 @@ Widget LanguageBottomSheet(BuildContext context) {
     return _a;
   }
 
-  void _languagemodalBottomSheetMenu() {
+
+  void languagemodalBottomSheetMenu() {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
@@ -72,35 +73,35 @@ Widget LanguageBottomSheet(BuildContext context) {
                       children: Language.languageList()
                           .map(
                             (e) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 7),
-                              child: InkWell(
-                                onTap: () {
-                                  data.updateLocale(
-                                      _changeLanguage(e, context));
-                                  Navigator.pop(context);
-                                  //iconpressed=!iconpressed;
-                                  // eniconpressed=!eniconpressed;
-                                  print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Center(
-                                        child: Text(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
+                          child: InkWell(
+                            onTap: () {
+                              data.updateLocale(
+                                  _changeLanguage(e, context));
+                              Navigator.pop(context);
+                              //iconpressed=!iconpressed;
+                              // eniconpressed=!eniconpressed;
+                              print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                            },
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Center(
+                                    child: Text(
                                       "${e.name}",
                                       style: lightThemenormalStyle,
                                     )),
-                                    Icon(
-                                      Icons.check_circle_outline,
-                                      size: 25,
-                                    ),
-                                  ],
+                                Icon(
+                                  Icons.check_circle_outline,
+                                  size: 25,
                                 ),
-                              ),
+                              ],
                             ),
-                          )
+                          ),
+                        ),
+                      )
                           .toList(),
                     );
                   })
@@ -110,10 +111,9 @@ Widget LanguageBottomSheet(BuildContext context) {
           );
         });
   }
-
   return InkWell(
     onTap: () {
-      _languagemodalBottomSheetMenu();
+      languagemodalBottomSheetMenu();
       // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LanguageScreen()));
     },
     child: Padding(
@@ -132,5 +132,131 @@ Widget LanguageBottomSheet(BuildContext context) {
         ],
       ),
     ),
+  );
+}
+
+
+Widget ABLanguageBottomSheet(BuildContext context) {
+  Locale _changeLanguage(Language language, context) {
+    Locale _a;
+    switch (language.languageCode) {
+      case Appconstants.ENGLISH:
+        _a = Locale(language.languageCode, "US");
+
+        break;
+      case Appconstants.Arabic:
+        _a = Locale(language.languageCode, "EG");
+
+        break;
+
+      default:
+        _a = Locale(language.languageCode, 'US');
+    }
+    return _a;
+  }
+
+
+  void languagemodalBottomSheetMenu() {
+    showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return new Container(
+            height: MediaQuery.of(context).size.height * .25,
+            color: Color(0xFF737373),
+            child: new Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0))),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalization.of(context)
+                              .getTranslatedValue("language")
+                              .toString(),
+                          style: lightThemetitleStyle,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.black,
+                            size: 25,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Consumer<LocaleCont>(builder: (context, data, _) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: Language.languageList()
+                          .map(
+                            (e) => Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
+                          child: InkWell(
+                            onTap: () {
+                              data.updateLocale(
+                                  _changeLanguage(e, context));
+                              Navigator.pop(context);
+                              //iconpressed=!iconpressed;
+                              // eniconpressed=!eniconpressed;
+                              print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                            },
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Center(
+                                    child: Text(
+                                      "${e.name}",
+                                      style: lightThemenormalStyle,
+                                    )),
+                                Icon(
+                                  Icons.check_circle_outline,
+                                  size: 25,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    );
+                  })
+                ],
+              ),
+            ),
+          );
+        });
+  }
+  return InkWell(
+    onTap: () {
+      languagemodalBottomSheetMenu();
+      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LanguageScreen()));
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width * .09,
+      height: MediaQuery.of(context).size.height * .09,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue, width: 3.0),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+          child: Text(
+            'ع',
+            style: lightThemetitleStyle,
+          )),
+    )
   );
 }

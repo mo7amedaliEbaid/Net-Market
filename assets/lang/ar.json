@@ -1,6 +1,6 @@
 {
   "title": "عبيد ستور",
-  "welcome_to_s" : "اهلا بك فى متجر عبيد",
+  "welcome_to_s" : "اهلا بك فى متجرنا",
   "login": "تسجيل الدخول",
   "signup":"تفعيل حسابك",
   "country":"البلد",
@@ -17,5 +17,14 @@
   "forgot_pass":"نسيت الرقم السري؟",
   "dont_have_account":"لا تمتلك حساب؟",
   "register": "انشاء حساب",
-  "create_account": "انشاء حساب"
+  "create_account": "انشاء حساب",
+  "order_time":"تاريخ الارسال",
+  "delivery_to": "ارسال الى",
+  "home": "الرئيسية",
+  "categories":"التصنيفات",
+  "order_status": "تفاصيل الطلب",
+  "cart": "السلة",
+  "account": "حسابى",
+  "client_name": "اسم العميل"
+
 }

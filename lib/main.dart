@@ -12,10 +12,18 @@ import 'package:net_market/services/localization.dart';
 import 'package:net_market/ui/screens/splash/splash_screen.dart';
 import 'package:net_market/ui/theme/theme_data.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:io';
 import 'providers/store_provider.dart';
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
 main()async{
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   await DarkThemeProvider().getTheme();
   runApp(
     MultiProvider(providers: [
